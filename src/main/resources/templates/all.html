@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>all keys</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<a href="/web/all">[all]</a> <a href="/web/allByCounter">[byCounter]</a> <a href="/web/allByKey">[byKey]</a> <a href="/web/reset">[reset]</a>
+<br/><br/>
+<div th:if="${#lists.isEmpty(keys)}">
+    Bisher wurden keine Counter angelegt.
+</div>
+<div th:unless="${#lists.isEmpty(keys)}">
+    <table border="1">
+        <tr th:each="key: ${keys}">
+            <td th:text="${key.key}"/>
+            <td th:text="${key.count}"/>
+        </tr>
+        <tr>
+            <td>total</td>
+            <td th:text="${total}"/>
+        </tr>
+    </table>
+    <br/><br/>
+    <table border="1">
+        <tr th:each="userAgent: ${statistics}">
+            <td th:text="${userAgent.key}"/>
+            <td th:text="${userAgent.count}"/>
+        </tr>
+    </table>
+</div>
+<br/><br/>
+<form action="/web/increment" method="post">
+    <input type="text" name="key" placeholder="enter key">
+</form>
+
+</body>
+</html>
